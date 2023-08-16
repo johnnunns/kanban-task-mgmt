@@ -15,7 +15,7 @@ const BoardColumns: React.FC<{ column: Column }> = ({ column }) => {
             {...provided.droppableProps}
             ref={provided.innerRef}
             className="column"
-            style={{ minWidth: '280px', height: '100%' }}
+            style={{ width: '300px', height: '100%' }}
           >
             <Box>
               {column.tasks.map((task, index) => (

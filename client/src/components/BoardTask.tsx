@@ -24,7 +24,9 @@ const BoardTask: React.FC<{ task: Task; columnId: string }> = ({
           openModal(Modals.VIEW_TASK, { taskData: task, columnId })
         }
       >
-        <Typography variant="h3">{task.title}</Typography>
+        <Typography sx={{ textAlign: 'left' }} variant="h3">
+          {task.title}
+        </Typography>
       </ButtonBase>
       {task.subtasks.length ? (
         <Typography color="text.secondary">
