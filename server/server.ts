@@ -28,7 +28,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 });
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 4000;
 
 const start = async () => {
   try {
