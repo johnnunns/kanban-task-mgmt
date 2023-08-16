@@ -1,5 +1,6 @@
-import 'express-async-errors'
+import 'express-async-errors';
 import express from 'express';
+import cors from 'cors';
 const app = express();
 import dotenv from 'dotenv';
 dotenv.config();
@@ -12,6 +13,12 @@ import mongoSanitize from 'express-mongo-sanitize';
 import connectDB from './db/connect';
 
 import boardRouter from './routes/boardRoutes';
+
+app.use(
+  cors({
+    origin: ['http://localhost:3000', 'https://kanban-task-mgmt.vercel.app/'],
+  })
+);
 
 if (process.env.NODE_ENV !== 'production') {
   app.use(morgan('dev'));
