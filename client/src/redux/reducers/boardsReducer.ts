@@ -30,11 +30,11 @@ const reducer = (
       case ActionType.CLOSE_MODAL:
         return { ...state, openModal: null };
       case ActionType.GET_BOARD_NAMES:
-        return { ...state, namesLoading: true, error: null, boardNames: [] };
+        return { ...state, namesLoading: true, error: null, boardNames: state.boardNames };
       case ActionType.GET_BOARD_NAMES_SUCCESS:
         return { ...state, namesLoading: false, error: null, boardNames: action.payload };
       case ActionType.GET_BOARD_NAMES_ERROR:
-        return { ...state, namesLoading: false, error: action.payload, boardNames: [] };
+        return { ...state, namesLoading: false, error: action.payload, boardNames: state.boardNames };
       case ActionType.GET_BOARD:
         return { ...state, loading: true, error: null, selectedBoard: null };
       case ActionType.GET_BOARD_SUCCESS:
@@ -52,6 +52,12 @@ const reducer = (
       case ActionType.EDIT_BOARD_SUCCESS:
         return { ...state,loading: false, error: null, selectedBoard: action.payload };
       case ActionType.EDIT_BOARD_ERROR:
+        return { ...state,loading: false, error: action.payload, selectedBoard: state.selectedBoard };
+      case ActionType.DELETE_BOARD:
+        return { ...state,loading: true, error: null, selectedBoard: state.selectedBoard};
+      case ActionType.DELETE_BOARD_SUCCESS:
+        return { ...state,loading: false, error: null, selectedBoard: null };
+      case ActionType.DELETE_BOARD_ERROR:
         return { ...state,loading: false, error: action.payload, selectedBoard: state.selectedBoard };
       case ActionType.CREATE_TASK:
         return { ...state,loading: true, error: null, selectedBoard: state.selectedBoard};

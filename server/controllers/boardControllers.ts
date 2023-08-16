@@ -147,7 +147,6 @@ const updateTask = async (req: any, res: any) => {
   const { boardId, columnId, taskId } = req.params;
   const { title, description, subtasks, destinationColumnId, destinationTaskIndex } = req.body;
   try {
-    console.log(req.body);
     // Find the board by ID and its specific column
     const board = await Board.findById(boardId);
 
