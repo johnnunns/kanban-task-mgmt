@@ -60,7 +60,7 @@ export const getBoardNames = () => {
       type: ActionType.GET_BOARD_NAMES,
     })
     try {
-      const { data } = await axiosInstance.get('/api/v1/boards/names');
+      const { data } = await axiosInstance.get('/boards/names');
 
       const names = data.map((result: BoardName) => {
         return { name: result.name, id: result.id };
@@ -87,7 +87,7 @@ export const createBoard = ({name, columns}: {name: string, columns: { name: str
     try {
       const cleanColumns = columns.filter((c) => c.name);
 
-      const { data } = await axiosInstance.post('/api/v1/boards', {
+      const { data } = await axiosInstance.post('/boards', {
         name,
         columns: cleanColumns,
       });
@@ -115,7 +115,7 @@ export const updateBoard = (boardId: string, boardName: string, columns: {name: 
     try {
       const cleanColumns = columns.filter((c) => c.name);
 
-      const { data } = await axiosInstance.patch(`/api/v1/boards/${boardId}`, {
+      const { data } = await axiosInstance.patch(`/boards/${boardId}`, {
         name: boardName,
         columns: cleanColumns,
       });
@@ -139,7 +139,7 @@ export const deleteBoard = (boardId: string) => {
       type: ActionType.DELETE_BOARD,
     })
     try {
-      const { data } = await axiosInstance.delete(`/api/v1/boards/${boardId}`);
+      const { data } = await axiosInstance.delete(`/boards/${boardId}`);
 
       dispatch({
         type: ActionType.DELETE_BOARD_SUCCESS,
@@ -160,7 +160,7 @@ export const getBoard = (boardId: string) => {
       type: ActionType.GET_BOARD,
     })
     try {
-      const { data } = await axiosInstance.get(`/api/v1/boards/${boardId}`);
+      const { data } = await axiosInstance.get(`/boards/${boardId}`);
 
       dispatch({
         type: ActionType.GET_BOARD_SUCCESS,
@@ -181,7 +181,7 @@ export const createTask = ({ boardId, columnId, title, description, subtasks }: 
       type: ActionType.CREATE_TASK,
     })
     try {
-      const { data } = await axiosInstance.post(`/api/v1/boards/${boardId}/columns/${columnId}/tasks`, {
+      const { data } = await axiosInstance.post(`/boards/${boardId}/columns/${columnId}/tasks`, {
         title,
         description,
         subtasks,
@@ -239,7 +239,7 @@ export const updateTask = ({ boardId, columnId, taskId, title, description, subt
 
 
     try {
-      const { data } = await axiosInstance.patch(`/api/v1/boards/${boardId}/columns/${columnId}/tasks/${taskId}`, {
+      const { data } = await axiosInstance.patch(`/boards/${boardId}/columns/${columnId}/tasks/${taskId}`, {
         title,
         description,
         subtasks,
@@ -266,7 +266,7 @@ export const deleteTask = ({ boardId, columnId, taskId }: {boardId: string, colu
       type: ActionType.DELETE_TASK,
     })
     try {
-      const { data } = await axiosInstance.delete(`/api/v1/boards/${boardId}/columns/${columnId}/tasks/${taskId}`);
+      const { data } = await axiosInstance.delete(`/boards/${boardId}/columns/${columnId}/tasks/${taskId}`);
 
       dispatch({
         type: ActionType.DELETE_TASK_SUCCESS,
@@ -287,7 +287,7 @@ export const updateSubtask = ({ boardId, columnId, taskId, subtaskId, isComplete
       type: ActionType.UPDATE_SUBTASK,
     })
     try {
-      const { data } = await axiosInstance.patch(`/api/v1/boards/${boardId}/columns/${columnId}/tasks/${taskId}/subtask/${subtaskId}`, {
+      const { data } = await axiosInstance.patch(`/boards/${boardId}/columns/${columnId}/tasks/${taskId}/subtask/${subtaskId}`, {
         isCompleted,
         title,
       });
