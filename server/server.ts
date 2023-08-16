@@ -14,19 +14,20 @@ import connectDB from './db/connect';
 
 import boardRouter from './routes/boardRoutes';
 
+
+if (process.env.NODE_ENV !== 'production') {
+  app.use(morgan('dev'));
+}
+
+app.use(express.urlencoded({ extended: true }))
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 app.use(
   cors({
     origin: ['http://localhost:3000', 'https://kanban-task-mgmt.vercel.app/'],
   })
 );
 
-if (process.env.NODE_ENV !== 'production') {
-  app.use(morgan('dev'));
-}
-
-app.use(express.static(path.resolve(__dirname, '../client/build')));
-
-app.use(express.json());
 app.use(helmet());
 app.use(mongoSanitize());
 
@@ -36,8 +37,8 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1', boardRouter);
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
 const port = process.env.PORT || 4000;
