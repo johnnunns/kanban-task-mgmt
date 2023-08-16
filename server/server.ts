@@ -6,6 +6,9 @@ dotenv.config();
 import morgan from 'morgan';
 import path from 'path';
 
+import helmet from 'helmet';
+import mongoSanitize from 'express-mongo-sanitize';
+
 import connectDB from './db/connect';
 
 import boardRouter from './routes/boardRoutes';
@@ -17,6 +20,8 @@ if (process.env.NODE_ENV !== 'production') {
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.use(express.json());
+app.use(helmet());
+app.use(mongoSanitize());
 
 app.get('/', (req, res) => {
   res.json({ msg: 'Welcome!' });
